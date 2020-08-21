@@ -64,7 +64,7 @@ passport.deserializeUser(function(id, done) {
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://secrets-v1.herokuapp.com/auth/google/secrets",
+    callbackURL: "http://secrets-v1.herokuapp.com/secrets",
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
   },
   function(accessToken, refreshToken, profile, cb) {
@@ -152,7 +152,7 @@ User.register({username: req.body.username}, req.body.password, function(err, us
     console.log(err);
     res.redirect("/register");
   } else{
-    passport.authenticate("google")(req, res, function(){
+    passport.authenticate("local")(req, res, function(){
       res.redirect("/secrets");
     });
   }
@@ -174,7 +174,7 @@ req.login(user, function(err){
   if (err) {
     console.log(err);
   } else {
-    passport.authenticate("google")(req, res, function(){
+    passport.authenticate("local")(req, res, function(){
       res.redirect("/secrets");
     });
   }
