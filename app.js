@@ -152,7 +152,7 @@ User.register({username: req.body.username}, req.body.password, function(err, us
     console.log(err);
     res.redirect("/register");
   } else{
-    passport.authenticate("local")(req, res, function(){
+    passport.authenticate("google")(req, res, function(){
       res.redirect("/secrets");
     });
   }
@@ -174,7 +174,7 @@ req.login(user, function(err){
   if (err) {
     console.log(err);
   } else {
-    passport.authenticate("local")(req, res, function(){
+    passport.authenticate("google")(req, res, function(){
       res.redirect("/secrets");
     });
   }
